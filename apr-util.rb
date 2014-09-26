@@ -23,6 +23,6 @@ class AprUtil < Formula
 
     system "./configure", *args
     system "make"
-    system "make install"
+    system "make", "install"
   end
 end

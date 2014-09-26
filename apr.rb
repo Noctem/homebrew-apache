@@ -19,16 +19,16 @@ class Apr < Formula
     ENV.deparallelize
 
     system "./configure", "--disable-debug", "--prefix=#{prefix}"
-    system "make install"
+    system "make", "install"
   end
 end
 
 __END__
 diff --git a/configure b/configure
-index 00122df..e64f479 100755
+index 860c65b..0e840d6 100755
 --- a/configure
 +++ b/configure
-@@ -6820,10 +6820,10 @@ if test "x$apr_preload_done" != "xyes" ; then
+@@ -6802,10 +6802,10 @@ if test "x$apr_preload_done" != "xyes" ; then
      *-apple-darwin*)
  
    if test "x$CPPFLAGS" = "x"; then
