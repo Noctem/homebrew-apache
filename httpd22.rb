@@ -2,8 +2,8 @@ require "formula"
 
 class Httpd22 < Formula
   homepage "https://httpd.apache.org/"
-  url "https://archive.apache.org/dist/httpd/httpd-2.2.27.tar.bz2"
-  sha1 "fd4bf18dd1b3e0d9be9e85ff7e033b2eb8aa4976"
+  url "https://archive.apache.org/dist/httpd/httpd-2.2.29.tar.bz2"
+  sha1 "1d6a8fbc1391d358cc6fe430edc16222b97258d5"
 
   conflicts_with "httpd24", :because => "different versions of the same software"
 
