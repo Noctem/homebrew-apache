@@ -1,9 +1,9 @@
-require 'formula'
+require "formula"
 
 class Apr < Formula
-  homepage 'http://apr.apache.org/'
-  url 'http://www.apache.org/dyn/closer.cgi?path=apr/apr-1.5.1.tar.bz2'
-  sha1 'f94e4e0b678282e0704e573b5b2fe6d48bd1c309'
+  homepage "https://apr.apache.org/"
+  url "https://www.apache.org/dyn/closer.cgi?path=apr/apr-1.5.1.tar.bz2"
+  sha1 "f94e4e0b678282e0704e573b5b2fe6d48bd1c309"
 
   keg_only :provided_by_osx
 
