@@ -11,7 +11,7 @@ class ModSecurity < Formula
   option 'with-brewed-httpd22', 'Use Homebrew Apache httpd 2.2'
   option 'with-brewed-httpd24', 'Use Homebrew Apache httpd 2.4'
 
-  depends_on 'homebrew/dupes/apr' if build.with? 'brewed-apr'
+  depends_on 'apr' if build.with? 'brewed-apr'
   depends_on 'httpd22' if build.with? 'brewed-httpd22'
   depends_on 'httpd24' if build.with? 'brewed-httpd24'
 

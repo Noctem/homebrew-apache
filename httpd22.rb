@@ -16,8 +16,8 @@ class Httpd22 < Formula
   option "with-privileged-ports", "Use the default ports 80 and 443 (which require root privileges), instead of 8080 and 8443"
 
   if build.with? "brewed-apr"
-    depends_on "homebrew/dupes/apr"
-    depends_on "homebrew/dupes/apr-util"
+    depends_on "apr"
+    depends_on "apr-util"
   end
 
   depends_on "pcre" => :optional

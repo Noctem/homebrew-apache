@@ -7,7 +7,7 @@ class AprUtil < Formula
 
   keg_only :provided_by_osx
 
-  depends_on "homebrew/apache/apr"
+  depends_on "apr"
   depends_on "mysql-connector-c" => :optional
 
   def install

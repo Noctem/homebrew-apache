@@ -8,7 +8,7 @@ class Ab < Formula
   keg_only :provided_by_osx
   conflicts_with "httpd22", "httpd24", :because => "both install `ab`"
 
-  depends_on "homebrew/apache/apr-util"
+  depends_on "apr-util"
   depends_on "libtool" => :build
 
   option "with-ssl-patch", 'Apply patch for: Bug 49382 - ab says "SSL read failed"'
@@ -30,8 +30,8 @@ class Ab < Formula
     ENV["LTFLAGS"] = "--tag CC"
     system "./configure", "--prefix=#{prefix}", "--disable-debug",
                           "--disable-dependency-tracking",
-                          "--with-apr=#{Formula["homebrew/dupes/apr"].opt_prefix}",
-                          "--with-apr-util=#{Formula["homebrew/dupes/apr-util"].opt_prefix}"
+                          "--with-apr=#{Formula["apr"].opt_prefix}",
+                          "--with-apr-util=#{Formula["apr-util"].opt_prefix}"
 
     cd "support" do
       system "make", "ab"
