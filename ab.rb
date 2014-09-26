@@ -2,8 +2,8 @@ require "formula"
 
 class Ab < Formula
   homepage "https://httpd.apache.org/docs/trunk/programs/ab.html"
-  url "https://archive.apache.org/dist/httpd/httpd-2.4.3.tar.bz2"
-  sha1 "0ef1281bb758add937efe61c345287be2f27f662"
+  url "https://archive.apache.org/dist/httpd/httpd-2.4.10.tar.bz2"
+  sha1 "00f5c3f8274139bd6160eda2cf514fa9b74549e5"
 
   depends_on "homebrew/apache/apr-util"
   depends_on "libtool" => :build
@@ -15,10 +15,10 @@ class Ab < Formula
 
   # Patch for https://issues.apache.org/bugzilla/show_bug.cgi?id=49382
   # Upstream has not incorporated the patch. Should keep following
-  # what upstream do about this.
+  # what upstream does about this.
   patch do
-    url "https://issues.apache.org/bugzilla/attachment.cgi?id=28435"
-    sha1 "5d430b6cf599b55628adf02648a04bfbb5fd1fa8"
+    url "https://gist.githubusercontent.com/Noctem/a0ba1477dbc11b5108b2/raw/ddf33c8a8b7939bbc3f12a1eb700a12b339d9194/ab-ssl-patch.diff"
+    sha1 "7c4591e343c84d956e241194aac2b2804d327147"
   end if build.with? "ssl-patch"
 
   def install
@@ -46,15 +46,15 @@ end
 
 __END__
 diff --git a/configure b/configure
-index 5f4c09f..84d3de2 100755
+index 90ae8be..243e9cf 100755
 --- a/configure
 +++ b/configure
-@@ -6037,8 +6037,6 @@ $as_echo "$as_me: Using external PCRE library from $PCRE_CONFIG" >&6;}
+@@ -6156,8 +6156,6 @@ $as_echo "$as_me: Using external PCRE library from $PCRE_CONFIG" >&6;}
      done
    fi
-
+ 
 -else
 -  as_fn_error $? "pcre-config for libpcre not found. PCRE is required and available from http://pcre.org/" "$LINENO" 5
  fi
-
+ 
    APACHE_VAR_SUBST="$APACHE_VAR_SUBST PCRE_LIBS"
