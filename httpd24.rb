@@ -18,6 +18,16 @@ class Httpd24 < Formula
   if build.with? "brewed-apr"
     depends_on "apr"
     depends_on "apr-util"
+  else
+    resource "apr" do
+      url "https://archive.apache.org/dist/apr/apr-1.5.1.tar.bz2"
+      sha1 "f94e4e0b678282e0704e573b5b2fe6d48bd1c309"
+    end
+
+    resource "apr-util" do
+      url "https://archive.apache.org/dist/apr/apr-util-1.5.4.tar.bz2"
+      sha1 "b00038b5081472ed094ced28bcbf2b5bb56c589d"
+    end
   end
 
   depends_on "pcre"
@@ -76,12 +86,8 @@ class Httpd24 < Formula
       mkdir_p "#{buildpath}/srclib/apr"
       mkdir_p "#{buildpath}/srclib/apr-util"
 
-      require 'net/http'
-      File.write("#{buildpath}/srclib/apr-1.5.1.tar.gz", Net::HTTP.get(URI.parse('https://archive.apache.org/dist/apr/apr-1.5.1.tar.gz')))
-      File.write("#{buildpath}/srclib/apr-util-1.5.3.tar.gz", Net::HTTP.get(URI.parse('https://archive.apache.org/dist/apr/apr-util-1.5.3.tar.gz')))
-
-      system 'tar', '-zxpv', '-C', "#{buildpath}/srclib/apr", '--strip-components=1', '-f', "#{buildpath}/srclib/apr-1.5.1.tar.gz"
-      system 'tar', '-zxpv', '-C', "#{buildpath}/srclib/apr-util", '--strip-components=1', '-f', "#{buildpath}/srclib/apr-util-1.5.3.tar.gz"
+      resource("apr").stage { mv Dir.glob("*"), "#{buildpath}/srclib/apr" }
+      resource("apr-util").stage { mv Dir.glob("*"), "#{buildpath}/srclib/apr-util" }
 
       args << "--with-included-apr"
     end
@@ -100,8 +106,8 @@ class Httpd24 < Formula
     system "make install"
     (var/"apache2/log").mkpath
     (var/"apache2/run").mkpath
-    FileUtils.touch("#{var}/log/apache2/access_log") unless File.exists?("#{var}/log/apache2/access_log")
-    FileUtils.touch("#{var}/log/apache2/error_log") unless File.exists?("#{var}/log/apache2/error_log")
+    touch("#{var}/log/apache2/access_log") unless File.exists?("#{var}/log/apache2/access_log")
+    touch("#{var}/log/apache2/error_log") unless File.exists?("#{var}/log/apache2/error_log")
   end
 
   def plist; <<-EOS.undent
