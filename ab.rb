@@ -5,6 +5,9 @@ class Ab < Formula
   url "https://archive.apache.org/dist/httpd/httpd-2.4.10.tar.bz2"
   sha1 "00f5c3f8274139bd6160eda2cf514fa9b74549e5"
 
+  keg_only :provided_by_osx
+  conflicts_with "httpd22", "httpd24", :because => "both install `ab`"
+
   depends_on "homebrew/apache/apr-util"
   depends_on "libtool" => :build
 
